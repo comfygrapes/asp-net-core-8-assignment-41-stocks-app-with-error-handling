@@ -97,11 +97,12 @@ namespace Repositories
                 StreamReader streamReader = new StreamReader(stream);
 
                 string response = await streamReader.ReadToEndAsync();
-                var responseListOfDictionaries = JsonSerializer.Deserialize<List<Dictionary<string, string>>>(response);
-                if (response == null)
+                if (response == null || response.Contains("error"))
                 {
                     throw new InvalidOperationException("No response from Finnhub server");
                 }
+
+                var responseListOfDictionaries = JsonSerializer.Deserialize<List<Dictionary<string, string>>>(response) ?? new();
 
                 if (responseListOfDictionaries != null && responseListOfDictionaries.Any())
                 {

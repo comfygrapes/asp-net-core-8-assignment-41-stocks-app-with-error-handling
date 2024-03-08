@@ -6,6 +6,7 @@ using ServiceContracts;
 using Services;
 using StocksApp.Options;
 using Serilog;
+using StocksApp.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,11 @@ Log.Logger = new LoggerConfiguration()
 if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandlingMiddleware();
 }
 
 if (!builder.Environment.IsEnvironment("Test"))

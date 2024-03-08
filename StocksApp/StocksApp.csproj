@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\svg\" />
   </ItemGroup>
 
   <ItemGroup>
